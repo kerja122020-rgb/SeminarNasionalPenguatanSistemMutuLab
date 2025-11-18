@@ -2,336 +2,437 @@
 <html lang="id">
  <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Pendaftaran Seminar Laboratorium</title>
+  <title>Portal Pendaftaran Seminar Mutu Laboratorium</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script><!-- SDKs -->
   <script src="/_sdk/element_sdk.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-        body {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            min-height: 100%;
-        }
-        
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .animated-gradient {
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .float-animation {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.4); }
-            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
-        }
-        
-        .pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .card-3d {
-            transition: all 0.3s ease;
-        }
-        
-        .card-3d:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-        
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            background-size: 1000px 100%;
-            animation: shimmer 3s infinite;
-        }
-        
-        .icon-bounce {
-            display: inline-block;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .pattern-bg {
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
-        }
-        
-        .register-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-        
-        .register-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
-        }
-        
-        .register-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-        
-        .register-btn:hover::before {
-            left: 100%;
-        }
-        
-        .contact-card {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-        
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        
-        .contact-card:hover::before {
-            opacity: 1;
-        }
-        
-        .wa-btn {
-            transition: all 0.3s ease;
-        }
-        
-        .wa-btn:hover {
-            background: #128C7E;
-            transform: scale(1.1);
-        }
-    </style>
+    body {
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    /* Fokus yang jelas untuk aksesibilitas */
+    :focus-visible {
+      outline: 3px solid #1d4ed8;
+      outline-offset: 3px;
+    }
+  </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body class="animated-gradient">
-  <div class="min-h-full py-10 px-4 pattern-bg">
-   <div class="max-w-5xl mx-auto"><!-- Hero Section -->
-    <div class="text-center mb-8 float-animation">
-     <div class="inline-block">
-      <svg class="w-24 h-24 mx-auto mb-4" viewbox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" fill="white" opacity="0.9" /> <path d="M30 45 L45 60 L70 35" stroke="#667eea" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" /> <circle cx="50" cy="50" r="35" stroke="#764ba2" stroke-width="3" fill="none" opacity="0.5" />
-      </svg>
-     </div>
-     <div class="inline-block glass-effect px-8 py-3 rounded-full pulse-glow mb-4"><span class="text-purple-700 font-bold text-lg">🎯 <span id="target-text">Target 500 Peserta</span></span>
-     </div>
-    </div><!-- Main Card -->
-    <div class="glass-effect rounded-3xl card-3d p-8 mb-6 shadow-2xl">
-     <h1 id="seminar-title" class="text-4xl font-extrabold text-center mb-6 gradient-text leading-tight">Penguatan Sistem Mutu Laboratorium melalui Penerapan Quality Control dan Akreditasi yang Berkesinambungan</h1><!-- Details Grid with Icons -->
-     <div class="grid md:grid-cols-2 gap-4 mb-8">
-      <div class="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl p-5 text-white card-3d">
-       <div class="flex items-center">
-        <div class="text-4xl mr-4 icon-bounce">
-         📅
-        </div>
-        <div>
-         <p class="text-sm opacity-90 font-semibold">Hari &amp; Tanggal</p>
-         <p id="seminar-date" class="text-xl font-bold">Minggu, 11 Januari 2026</p>
-        </div>
-       </div>
-      </div>
-      <div class="bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl p-5 text-white card-3d">
-       <div class="flex items-center">
-        <div class="text-4xl mr-4 icon-bounce" style="animation-delay: 0.2s;">
-         ⏰
-        </div>
-        <div>
-         <p class="text-sm opacity-90 font-semibold">Waktu</p>
-         <p id="seminar-time" class="text-xl font-bold">07.30 sd 16.00 WITA</p>
-        </div>
-       </div>
-      </div>
-      <div class="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl p-5 text-white card-3d">
-       <div class="flex items-center">
-        <div class="text-4xl mr-4 icon-bounce" style="animation-delay: 0.4s;">
-         🖥️
-        </div>
-        <div>
-         <p class="text-sm opacity-90 font-semibold">Platform</p>
-         <p class="text-xl font-bold">Hybrid (Online &amp; Offline)</p>
-        </div>
-       </div>
-      </div>
-      <div class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-5 text-white card-3d">
-       <div class="flex items-center">
-        <div class="text-4xl mr-4 icon-bounce" style="animation-delay: 0.6s;">
-         📍
-        </div>
-        <div>
-         <p class="text-sm opacity-90 font-semibold">Tempat (Offline)</p>
-         <p id="venue" class="text-base font-bold">Gedung Aula Rumah Jabatan Bupati Pangkajene &amp; Kepulauan</p>
-        </div>
-       </div>
-      </div>
-     </div><!-- Pricing with Sparkle Effect -->
-     <div class="bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-2xl p-8 text-white mb-8 card-3d shimmer">
-      <h3 class="text-3xl font-extrabold mb-6 text-center"><span class="icon-bounce inline-block">💰</span> Biaya Pendaftaran</h3>
-      <div class="grid md:grid-cols-2 gap-6">
-       <div class="bg-white bg-opacity-25 backdrop-blur rounded-xl p-6 text-center card-3d">
-        <div class="text-5xl mb-3">
-         🏢
-        </div>
-        <p class="text-lg mb-2 font-semibold">Offline</p>
-        <p id="price-offline" class="text-4xl font-extrabold">Rp. 100.000</p>
-       </div>
-       <div class="bg-white bg-opacity-25 backdrop-blur rounded-xl p-6 text-center card-3d">
-        <div class="text-5xl mb-3">
-         💻
-        </div>
-        <p class="text-lg mb-2 font-semibold">Online</p>
-        <p id="price-online" class="text-4xl font-extrabold">Rp. 50.000</p>
-       </div>
-      </div>
-     </div><!-- Super Attractive Registration Button -->
-     <div class="text-center"><a href="https://forms.gle/eoe1tK3TVKJYJsos6" target="_blank" rel="noopener noreferrer" class="register-btn inline-block bg-gradient-to-r from-green-500 via-emerald-600 to-teal-600 text-white font-extrabold text-2xl px-16 py-6 rounded-full shadow-2xl"> <span class="relative z-10 flex items-center justify-center"> <span class="text-3xl mr-3">✅</span> DAFTAR SEKARANG <span class="text-3xl ml-3">🚀</span> </span> </a>
-      <p class="mt-4 text-white font-semibold text-lg">Buruan daftar sebelum kuota penuh!</p>
-     </div>
-    </div><!-- Contact Section with Enhanced Design -->
-    <div class="glass-effect rounded-3xl p-8 shadow-2xl">
-     <h2 class="text-3xl font-extrabold text-center mb-3 gradient-text"><span class="icon-bounce inline-block">📞</span> Narahubung Pendaftaran</h2>
-     <p class="text-center text-gray-600 mb-8 text-lg">Hubungi kami untuk informasi lebih lanjut</p>
-     <div class="grid md:grid-cols-3 gap-6"><!-- Contact 1 -->
-      <div class="contact-card bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl p-6 border-4 border-purple-300 card-3d">
-       <div class="text-center">
-        <div class="relative inline-block mb-4">
-         <div class="bg-gradient-to-br from-purple-600 to-purple-800 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto text-2xl font-bold shadow-lg">
-          1
-         </div>
-         <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div>
-        </div>
-        <h3 class="font-extrabold text-gray-800 text-xl mb-1">KARLINA</h3>
-        <p class="text-sm text-purple-700 font-bold mb-4">(PANGKEP)</p><a href="https://wa.me/6285341742606" target="_blank" rel="noopener noreferrer" class="wa-btn inline-flex items-center justify-center bg-green-500 text-white px-6 py-3 rounded-xl font-bold shadow-lg w-full"> <span class="text-xl mr-2">💬</span> 085341742606 </a>
-       </div>
-      </div><!-- Contact 2 -->
-      <div class="contact-card bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-6 border-4 border-blue-300 card-3d">
-       <div class="text-center">
-        <div class="relative inline-block mb-4">
-         <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto text-2xl font-bold shadow-lg">
-          2
-         </div>
-         <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div>
-        </div>
-        <h3 class="font-extrabold text-gray-800 text-xl mb-1">AULIA HARUN</h3>
-        <p class="text-sm text-blue-700 font-bold mb-4">(MAROS)</p><a href="https://wa.me/6281341065270" target="_blank" rel="noopener noreferrer" class="wa-btn inline-flex items-center justify-center bg-green-500 text-white px-6 py-3 rounded-xl font-bold shadow-lg w-full"> <span class="text-xl mr-2">💬</span> 081341065270 </a>
-       </div>
-      </div><!-- Contact 3 -->
-      <div class="contact-card bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl p-6 border-4 border-pink-300 card-3d">
-       <div class="text-center">
-        <div class="relative inline-block mb-4">
-         <div class="bg-gradient-to-br from-pink-600 to-pink-800 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto text-2xl font-bold shadow-lg">
-          3
-         </div>
-         <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div>
-        </div>
-        <h3 class="font-extrabold text-gray-800 text-xl mb-1">WIDYA</h3>
-        <p class="text-sm text-pink-700 font-bold mb-4">(BARRU)</p><a href="https://wa.me/6281939270533" target="_blank" rel="noopener noreferrer" class="wa-btn inline-flex items-center justify-center bg-green-500 text-white px-6 py-3 rounded-xl font-bold shadow-lg w-full"> <span class="text-xl mr-2">💬</span> 081939270533 </a>
-       </div>
-      </div>
-     </div>
-    </div><!-- Footer -->
-    <div class="text-center mt-8">
-     <p class="text-white text-lg font-semibold opacity-90">✨ Jangan lewatkan kesempatan emas ini! ✨</p>
+ <body class="h-full m-0 p-0">
+  <header class="w-full"><!-- Top bar -->
+   <div id="top-bar" class="w-full">
+    <div class="max-w-5xl mx-auto px-4 py-2 flex items-center justify-between">
+     <p id="top-bar-text" class="text-xs sm:text-sm font-medium"></p><span id="top-bar-tag" class="inline-flex items-center px-2 py-1 rounded-full text-[11px] sm:text-xs font-semibold uppercase tracking-wide"></span>
     </div>
    </div>
-  </div>
+  </header>
+  <main class="min-h-full flex flex-col">
+   <section id="hero-section" class="flex-1">
+    <div class="max-w-5xl mx-auto px-4 py-6 sm:py-10 md:py-12">
+     <div class="grid md:grid-cols-[2fr,1.4fr] gap-6 md:gap-8 items-start"><!-- Hero text -->
+      <div>
+       <h1 id="hero-title" class="font-bold mb-3 leading-tight"></h1>
+       <p id="hero-subtitle" class="mb-4 sm:mb-6"></p><!-- Info chips -->
+       <div class="flex flex-wrap gap-2 mb-4 sm:mb-6">
+        <div class="flex items-center gap-2 px-3 py-2 rounded-full text-xs sm:text-sm font-medium"><span>Target 500 Peserta</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-2 rounded-full text-xs sm:text-sm font-medium"><span>Hybrid (Luring &amp; Daring)</span>
+        </div>
+       </div><!-- Date & time card for mobile -->
+       <div class="md:hidden mb-5 rounded-xl p-4 space-y-2">
+        <div class="flex items-start gap-3">
+         <div class="mt-1"><!-- Calendar icon -->
+          <svg class="w-5 h-5" viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="3"></rect> <path d="M3 9h18"></path> <path d="M8 3v4"></path> <path d="M16 3v4"></path>
+          </svg>
+         </div>
+         <div>
+          <p class="text-xs uppercase tracking-wide font-semibold">Hari / Tanggal</p>
+          <p class="text-sm font-medium">Minggu, 11 Januari 2026</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-3">
+         <div class="mt-1"><!-- Clock icon -->
+          <svg class="w-5 h-5" viewbox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle> <path d="M12 7v5l3 3"></path>
+          </svg>
+         </div>
+         <div>
+          <p class="text-xs uppercase tracking-wide font-semibold">Waktu</p>
+          <p class="text-sm font-medium">07.30 – 16.00 WITA</p>
+         </div>
+        </div>
+       </div><!-- CTA buttons -->
+       <div class="flex flex-wrap items-center gap-3 sm:gap-4"><a id="register-button" href="https://forms.gle/eoe1tK3TVKJYJsos6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"> <span id="register-button-label">Daftar Sekarang</span>
+         <svg class="w-4 h-4 ml-2" viewbox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7"></path> <path d="M7 7h10v10"></path>
+         </svg></a>
+        <div class="text-[11px] sm:text-xs">
+         <p id="quota-text" class="font-medium"></p>
+         <p id="note-text"></p>
+        </div>
+       </div>
+      </div><!-- Event details panel -->
+      <aside aria-label="Detail seminar" class="rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm">
+       <h2 class="text-sm sm:text-base font-semibold mb-4">Detail Seminar</h2>
+       <div class="space-y-4 text-xs sm:text-sm">
+        <div class="flex gap-3">
+         <div class="mt-1 shrink-0"><!-- Calendar icon -->
+          <svg class="w-5 h-5" viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="3"></rect> <path d="M3 9h18"></path> <path d="M8 3v4"></path> <path d="M16 3v4"></path>
+          </svg>
+         </div>
+         <div>
+          <p class="font-medium">Hari / Tanggal</p>
+          <p>Minggu, 11 Januari 2026</p>
+         </div>
+        </div>
+        <div class="flex gap-3">
+         <div class="mt-1 shrink-0"><!-- Clock icon -->
+          <svg class="w-5 h-5" viewbox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle> <path d="M12 7v5l3 3"></path>
+          </svg>
+         </div>
+         <div>
+          <p class="font-medium">Waktu</p>
+          <p>07.30 – 16.00 WITA</p>
+         </div>
+        </div>
+        <div class="flex gap-3">
+         <div class="mt-1 shrink-0"><!-- Location icon -->
+          <svg class="w-5 h-5" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-7.1 7-11.5S15.866 3 12 3 5 5.015 5 9.5 12 21 12 21z"></path> <circle cx="12" cy="9.5" r="2.5"></circle>
+          </svg>
+         </div>
+         <div>
+          <p class="font-medium">Tempat (Luring)</p>
+          <p>Gedung Aula Rumah Jabatan Bupati Pangkajene &amp; Kepulauan</p>
+         </div>
+        </div>
+        <div class="flex gap-3">
+         <div class="mt-1 shrink-0"><!-- Online icon -->
+          <svg class="w-5 h-5" viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"></rect> <path d="M8 20h8"></path> <path d="M10 16h4"></path>
+          </svg>
+         </div>
+         <div>
+          <p class="font-medium">Platform</p>
+          <p>Hybrid: Luring &amp; Daring</p>
+          <p class="text-[11px] mt-1">Link daring akan dibagikan kepada peserta online yang terdaftar.</p>
+         </div>
+        </div>
+        <div class="pt-2 border-t text-xs sm:text-sm">
+         <p class="font-semibold mb-1" id="fee-section-heading">Biaya / Tarif Per Peserta</p>
+         <ul class="space-y-1">
+          <li>Umum (Offline): Rp 100.000</li>
+          <li>Umum (Online): Rp 50.000</li>
+         </ul>
+        </div>
+       </div>
+      </aside>
+     </div>
+    </div>
+   </section><!-- Narahubung & info tambahan -->
+   <section aria-labelledby="narahubung-title">
+    <div class="max-w-5xl mx-auto px-4 pb-6 sm:pb-10 md:pb-12 grid md:grid-cols-[1.4fr,2fr] gap-6 md:gap-8 items-start"><!-- Narahubung -->
+     <aside class="rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm">
+      <h2 id="narahubung-title" class="text-sm sm:text-base font-semibold mb-3"></h2>
+      <p class="text-xs sm:text-sm mb-4">Silakan hubungi narahubung berikut untuk informasi atau konfirmasi pendaftaran:</p>
+      <ul class="space-y-3 text-xs sm:text-sm">
+       <li class="flex gap-3">
+        <div class="mt-1 shrink-0"><!-- Phone icon -->
+         <svg class="w-4 h-4" viewbox="0 0 24 24" aria-hidden="true"><path d="M6.5 3A2.5 2.5 0 0 0 4 5.5v1.3c0 6.2 5 11.2 11.2 11.2h1.3A2.5 2.5 0 0 0 19 15.5v-1.2a1 1 0 0 0-.76-.97l-3.1-.78a1 1 0 0 0-1.02.34l-.89 1.14a1 1 0 0 1-1.29.25 8.08 8.08 0 0 1-3.71-3.71 1 1 0 0 1 .25-1.29l1.14-.89a1 1 0 0 0 .34-1.02l-.78-3.1A1 1 0 0 0 7.7 4H6.5z"></path>
+         </svg>
+        </div>
+        <div>
+         <p class="font-medium">KARLINA (Pangkep)</p>
+         <p>WA: <span class="font-mono">085341742606</span></p>
+        </div></li>
+       <li class="flex gap-3">
+        <div class="mt-1 shrink-0">
+         <svg class="w-4 h-4" viewbox="0 0 24 24" aria-hidden="true"><path d="M6.5 3A2.5 2.5 0 0 0 4 5.5v1.3c0 6.2 5 11.2 11.2 11.2h1.3A2.5 2.5 0 0 0 19 15.5v-1.2a1 1 0 0 0-.76-.97l-3.1-.78a1 1 0 0 0-1.02.34l-.89 1.14a1 1 0 0 1-1.29.25 8.08 8.08 0 0 1-3.71-3.71 1 1 0 0 1 .25-1.29l1.14-.89a1 1 0 0 0 .34-1.02l-.78-3.1A1 1 0 0 0 7.7 4H6.5z"></path>
+         </svg>
+        </div>
+        <div>
+         <p class="font-medium">AULIA HARUN (Maros)</p>
+         <p>WA: <span class="font-mono">081341065270</span></p>
+        </div></li>
+       <li class="flex gap-3">
+        <div class="mt-1 shrink-0">
+         <svg class="w-4 h-4" viewbox="0 0 24 24" aria-hidden="true"><path d="M6.5 3A2.5 2.5 0 0 0 4 5.5v1.3c0 6.2 5 11.2 11.2 11.2h1.3A2.5 2.5 0 0 0 19 15.5v-1.2a1 1 0 0 0-.76-.97l-3.1-.78a1 1 0 0 0-1.02.34l-.89 1.14a1 1 0 0 1-1.29.25 8.08 8.08 0 0 1-3.71-3.71 1 1 0 0 1 .25-1.29l1.14-.89a1 1 0 0 0 .34-1.02l-.78-3.1A1 1 0 0 0 7.7 4H6.5z"></path>
+         </svg>
+        </div>
+        <div>
+         <p class="font-medium">WIDYA (Barru)</p>
+         <p>WA: <span class="font-mono">081939270533</span></p>
+        </div></li>
+      </ul>
+     </aside><!-- Info tambahan / highlight -->
+     <div class="space-y-4 sm:space-y-5 md:space-y-6">
+      <section class="rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm" aria-labelledby="ringkasan-title">
+       <h2 id="ringkasan-title" class="text-sm sm:text-base font-semibold mb-3">Ringkasan Seminar</h2>
+       <p id="event-description" class="text-xs sm:text-sm leading-relaxed">Seminar ini membahas penguatan sistem mutu laboratorium melalui penerapan Quality Control dan akreditasi yang berkesinambungan, untuk mendukung layanan laboratorium yang terpercaya dan berstandar.</p>
+       <ul class="mt-3 text-xs sm:text-sm list-disc list-inside space-y-1">
+        <li>Fokus pada penerapan Quality Control di laboratorium.</li>
+        <li>Penguatan pemahaman proses akreditasi yang berkelanjutan.</li>
+        <li>Cocok untuk tenaga laboratorium, manajer mutu, dan pengelola fasilitas kesehatan.</li>
+       </ul>
+      </section>
+      <section class="rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm" aria-labelledby="kuota-title">
+       <div class="flex items-start justify-between gap-3">
+        <div>
+         <h2 id="kuota-title" class="text-sm sm:text-base font-semibold mb-1">Kuota &amp; Peserta</h2>
+         <p class="text-xs sm:text-sm">Target peserta: <span class="font-semibold">500 orang</span>.</p>
+        </div>
+        <div class="text-right text-xs sm:text-sm">
+         <p class="font-semibold">Segera amankan kursi Anda</p>
+         <p>Daftar melalui tombol di atas.</p>
+        </div>
+       </div>
+      </section>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="w-full" aria-label="Informasi penutup">
+   <div class="max-w-5xl mx-auto px-4 py-4 sm:py-5 text-[11px] sm:text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-t border-white/10">
+    <p id="footer-text">Portal pendaftaran seminar Penguatan Sistem Mutu Laboratorium.</p>
+    <p>Silakan sebar luaskan informasi ini kepada rekan sejawat.</p>
+   </div>
+  </footer>
   <script>
-        const defaultConfig = {
-            seminar_title: "Penguatan Sistem Mutu Laboratorium melalui Penerapan Quality Control dan Akreditasi yang Berkesinambungan",
-            seminar_date: "Minggu, 11 Januari 2026",
-            seminar_time: "07.30 sd 16.00 WITA",
-            venue: "Gedung Aula Rumah Jabatan Bupati Pangkajene & Kepulauan",
-            target_participants: "Target 500 Peserta",
-            price_offline: "Rp. 100.000",
-            price_online: "Rp. 50.000"
-        };
+    // Warna dan font default (maks 5 warna)
+    const defaultConfig = {
+      // Colors
+      background_color: "#0f172a",      // BACKGROUND (biru tua)
+      surface_color: "#020617",         // SECONDARY_SURFACE (lebih gelap untuk kartu)
+      text_color: "#e5e7eb",            // TEXT (abu terang)
+      primary_color: "#2563eb",         // PRIMARY_ACTION (biru tombol)
+      secondary_color: "#f97316",       // SECONDARY_ACTION / aksen (oranye)
 
-        async function onConfigChange(config) {
-            document.getElementById('seminar-title').textContent = config.seminar_title || defaultConfig.seminar_title;
-            document.getElementById('seminar-date').textContent = config.seminar_date || defaultConfig.seminar_date;
-            document.getElementById('seminar-time').textContent = config.seminar_time || defaultConfig.seminar_time;
-            document.getElementById('venue').textContent = config.venue || defaultConfig.venue;
-            document.getElementById('target-text').textContent = config.target_participants || defaultConfig.target_participants;
-            document.getElementById('price-offline').textContent = config.price_offline || defaultConfig.price_offline;
-            document.getElementById('price-online').textContent = config.price_online || defaultConfig.price_online;
-        }
+      // Typography
+      font_family: "Inter",
+      font_size: 16,
 
-        function mapToCapabilities(config) {
-            return {
-                recolorables: [],
-                borderables: [],
-                fontEditable: undefined,
-                fontSizeable: undefined
-            };
-        }
+      // Texts
+      hero_title: "Penguatan Sistem Mutu Laboratorium melalui Penerapan Quality Control dan Akreditasi yang Berkesinambungan",
+      hero_subtitle: "Seminar sehari untuk meningkatkan mutu layanan laboratorium melalui penerapan Quality Control yang efektif dan akreditasi yang berkelanjutan.",
+      event_description: "Seminar ini membahas penguatan sistem mutu laboratorium melalui penerapan Quality Control dan akreditasi yang berkesinambungan, untuk mendukung layanan laboratorium yang terpercaya dan berstandar.",
+      register_button_text: "Daftar Sekarang",
+      contact_section_title: "Narahubung Pendaftaran",
+      fee_section_title: "Biaya / Tarif Per Peserta",
+      footer_text: "Portal pendaftaran seminar Penguatan Sistem Mutu Laboratorium."
+    };
 
-        function mapToEditPanelValues(config) {
-            return new Map([
-                ["seminar_title", config.seminar_title || defaultConfig.seminar_title],
-                ["seminar_date", config.seminar_date || defaultConfig.seminar_date],
-                ["seminar_time", config.seminar_time || defaultConfig.seminar_time],
-                ["venue", config.venue || defaultConfig.venue],
-                ["target_participants", config.target_participants || defaultConfig.target_participants],
-                ["price_offline", config.price_offline || defaultConfig.price_offline],
-                ["price_online", config.price_online || defaultConfig.price_online]
-            ]);
-        }
+    // Inisialisasi tampilan sesuai config
+    async function onConfigChange(config) {
+      const cfg = Object.assign({}, defaultConfig, config || {});
 
-        if (window.elementSdk) {
-            window.elementSdk.init({
-                defaultConfig,
-                onConfigChange,
-                mapToCapabilities,
-                mapToEditPanelValues
-            });
+      // Ambil elemen
+      const body = document.body;
+      const heroSection = document.getElementById("hero-section");
+      const topBar = document.getElementById("top-bar");
+      const topBarText = document.getElementById("top-bar-text");
+      const topBarTag = document.getElementById("top-bar-tag");
+      const heroTitle = document.getElementById("hero-title");
+      const heroSubtitle = document.getElementById("hero-subtitle");
+      const registerButton = document.getElementById("register-button");
+      const registerButtonLabel = document.getElementById("register-button-label");
+      const quotaText = document.getElementById("quota-text");
+      const noteText = document.getElementById("note-text");
+      const narahubungTitle = document.getElementById("narahubung-title");
+      const feeSectionHeading = document.getElementById("fee-section-heading");
+      const footerText = document.getElementById("footer-text");
+      const eventDescription = document.getElementById("event-description");
+
+      // Font & ukuran
+      const baseFont = cfg.font_family || defaultConfig.font_family;
+      const baseStack = "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+      const fullFontStack = baseFont + ", " + baseStack;
+      const baseSize = Number(cfg.font_size || defaultConfig.font_size);
+
+      body.style.fontFamily = fullFontStack;
+      body.style.fontSize = baseSize + "px";
+
+      // Skala teks
+      heroTitle.style.fontSize = (baseSize * 1.7) + "px";
+      heroSubtitle.style.fontSize = (baseSize * 1.0) + "px";
+      eventDescription.style.fontSize = (baseSize * 0.9) + "px";
+      topBarText.style.fontSize = (baseSize * 0.7) + "px";
+      topBarTag.style.fontSize = (baseSize * 0.7) + "px";
+      registerButtonLabel.style.fontSize = (baseSize * 0.9) + "px";
+      footerText.style.fontSize = (baseSize * 0.75) + "px";
+
+      // Warna latar & teks utama
+      body.style.backgroundColor = cfg.background_color;
+      body.style.color = cfg.text_color;
+      heroSection.style.background = "radial-gradient(circle at top left, " + cfg.primary_color + "22, transparent 55%), " + cfg.surface_color;
+
+      // Top bar
+      topBar.style.backgroundColor = cfg.surface_color;
+      topBarText.style.color = cfg.text_color;
+      topBarText.textContent = "Minggu, 11 Januari 2026 · 07.30 – 16.00 WITA · Gedung Aula Rumah Jabatan Bupati Pangkajene & Kepulauan";
+      topBarTag.textContent = "Hybrid Seminar";
+      topBarTag.style.backgroundColor = cfg.primary_color;
+      topBarTag.style.color = "#ffffff";
+
+      // Hero texts
+      heroTitle.textContent = cfg.hero_title || defaultConfig.hero_title;
+      heroSubtitle.textContent = cfg.hero_subtitle || defaultConfig.hero_subtitle;
+
+      // Button
+      registerButtonLabel.textContent = cfg.register_button_text || defaultConfig.register_button_text;
+      registerButton.style.backgroundColor = cfg.primary_color;
+      registerButton.style.color = "#ffffff";
+      registerButton.addEventListener("mouseover", function () {
+        registerButton.style.backgroundColor = shadeColor(cfg.primary_color, -10);
+      });
+      registerButton.addEventListener("mouseout", function () {
+        registerButton.style.backgroundColor = cfg.primary_color;
+      });
+
+      // Quota & note
+      quotaText.textContent = "Target 500 peserta (online & offline).";
+      quotaText.style.color = cfg.text_color;
+      noteText.textContent = "Pendaftaran melalui formulir online, konfirmasi pembayaran via narahubung.";
+      noteText.style.color = cfg.text_color;
+
+      // Narahubung
+      narahubungTitle.textContent = cfg.contact_section_title || defaultConfig.contact_section_title;
+
+      // Fee heading
+      feeSectionHeading.textContent = cfg.fee_section_title || defaultConfig.fee_section_title;
+
+      // Event description
+      eventDescription.textContent = cfg.event_description || defaultConfig.event_description;
+
+      // Kartu & panel warna
+      const cards = document.querySelectorAll("aside.rounded-2xl, section.rounded-2xl");
+      cards.forEach(function (card) {
+        card.style.backgroundColor = cfg.surface_color;
+        card.style.borderRadius = "1rem";
+        card.style.border = "1px solid " + cfg.primary_color + "22";
+        card.style.color = cfg.text_color;
+      });
+
+      // Footer
+      const footer = document.querySelector("footer");
+      if (footer) {
+        footer.style.backgroundColor = cfg.surface_color;
+        footerText.textContent = cfg.footer_text || defaultConfig.footer_text;
+        footerText.style.color = cfg.text_color;
+      }
+
+      // SVG warna
+      const svgs = document.querySelectorAll("svg");
+      svgs.forEach(function (icon) {
+        icon.style.stroke = cfg.secondary_color;
+        icon.style.fill = "none";
+      });
+    }
+
+    // Fungsi bantu untuk menggelapkan warna (hover)
+    function shadeColor(color, percent) {
+      let R = parseInt(color.substring(1, 3), 16);
+      let G = parseInt(color.substring(3, 5), 16);
+      let B = parseInt(color.substring(5, 7), 16);
+
+      R = parseInt(R * (100 + percent) / 100);
+      G = parseInt(G * (100 + percent) / 100);
+      B = parseInt(B * (100 + percent) / 100);
+
+      R = (R < 255) ? R : 255;
+      G = (G < 255) ? G : 255;
+      B = (B < 255) ? B : 255;
+
+      const RR = (R.toString(16).length === 1) ? "0" + R.toString(16) : R.toString(16);
+      const GG = (G.toString(16).length === 1) ? "0" + G.toString(16) : G.toString(16);
+      const BB = (B.toString(16).length === 1) ? "0" + B.toString(16) : B.toString(16);
+
+      return "#" + RR + GG + BB;
+    }
+
+    // Inisialisasi Element SDK (untuk edit teks & warna di Canva)
+    (function initElementSdk() {
+      if (!window.elementSdk) {
+        // Jika SDK belum tersedia, tetap render dengan defaultConfig
+        onConfigChange(defaultConfig);
+        return;
+      }
+
+      window.elementSdk.init({
+        defaultConfig: defaultConfig,
+        onConfigChange: async (config) => {
+          await onConfigChange(config);
+        },
+        mapToCapabilities: (config) => {
+          const cfg = Object.assign({}, defaultConfig, config || {});
+          return {
+            recolorables: [
+              {
+                get: () => cfg.background_color,
+                set: (value) => {
+                  cfg.background_color = value;
+                  window.elementSdk.setConfig({ background_color: value });
+                }
+              },
+              {
+                get: () => cfg.surface_color,
+                set: (value) => {
+                  cfg.surface_color = value;
+                  window.elementSdk.setConfig({ surface_color: value });
+                }
+              },
+              {
+                get: () => cfg.text_color,
+                set: (value) => {
+                  cfg.text_color = value;
+                  window.elementSdk.setConfig({ text_color: value });
+                }
+              },
+              {
+                get: () => cfg.primary_color,
+                set: (value) => {
+                  cfg.primary_color = value;
+                  window.elementSdk.setConfig({ primary_color: value });
+                }
+              },
+              {
+                get: () => cfg.secondary_color,
+                set: (value) => {
+                  cfg.secondary_color = value;
+                  window.elementSdk.setConfig({ secondary_color: value });
+                }
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => cfg.font_family,
+              set: (value) => {
+                cfg.font_family = value;
+                window.elementSdk.setConfig({ font_family: value });
+              }
+            },
+            fontSizeable: {
+              get: () => cfg.font_size,
+              set: (value) => {
+                cfg.font_size = value;
+                window.elementSdk.setConfig({ font_size: value });
+              }
+            }
+          };
+        },
+        mapToEditPanelValues: (config) => {
+          const cfg = Object.assign({}, defaultConfig, config || {});
+          return new Map([
+            ["hero_title", cfg.hero_title],
+            ["hero_subtitle", cfg.hero_subtitle],
+            ["event_description", cfg.event_description],
+            ["register_button_text", cfg.register_button_text],
+            ["contact_section_title", cfg.contact_section_title],
+            ["fee_section_title", cfg.fee_section_title],
+            ["footer_text", cfg.footer_text]
+          ]);
         }
-    </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a082f6bd7a4b29b',t:'MTc2MzQ3NjQzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+      });
+    })();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a08366f418f61bc',t:'MTc2MzQ3NjcxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
