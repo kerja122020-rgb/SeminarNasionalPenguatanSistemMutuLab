@@ -3,556 +3,335 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Seminar Penguatan Sistem Mutu Laboratorium</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Portal Pendaftaran Seminar Laboratorium</title>
   <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      box-sizing: border-box;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    
-    /* Background laboratorium dengan animasi */
-    .lab-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-    
-    .lab-pattern {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0.08;
-      background-image: 
-        repeating-linear-gradient(0deg, transparent, transparent 2px, currentColor 2px, currentColor 3px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, currentColor 2px, currentColor 3px);
-      background-size: 40px 40px;
-    }
-    
-    /* Animasi bubble laboratorium */
-    .bubble {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.15;
-      animation: float-up 15s infinite ease-in-out;
-    }
-    
-    @keyframes float-up {
-      0% {
-        transform: translateY(100%) scale(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.15;
-      }
-      90% {
-        opacity: 0.15;
-      }
-      100% {
-        transform: translateY(-100%) scale(1);
-        opacity: 0;
-      }
-    }
-    
-    .bubble:nth-child(1) { left: 10%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 12s; }
-    .bubble:nth-child(2) { left: 25%; width: 40px; height: 40px; animation-delay: 2s; animation-duration: 15s; }
-    .bubble:nth-child(3) { left: 45%; width: 80px; height: 80px; animation-delay: 4s; animation-duration: 18s; }
-    .bubble:nth-child(4) { left: 65%; width: 50px; height: 50px; animation-delay: 1s; animation-duration: 14s; }
-    .bubble:nth-child(5) { left: 80%; width: 70px; height: 70px; animation-delay: 3s; animation-duration: 16s; }
-    .bubble:nth-child(6) { left: 35%; width: 45px; height: 45px; animation-delay: 5s; animation-duration: 13s; }
-    
-    /* Glass morphism effect */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    }
-    
-    .glass-card-strong {
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Hover effects */
-    .hover-lift {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .hover-lift:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
-    }
-    
-    /* Pulse animation untuk CTA */
-    @keyframes pulse-glow {
-      0%, 100% {
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-      }
-      50% {
-        box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
-      }
-    }
-    
-    .pulse-cta {
-      animation: pulse-glow 2s infinite;
-    }
-    
-    /* Focus states */
-    :focus-visible {
-      outline: 2px solid #10b981;
-      outline-offset: 2px;
-    }
-    
-    /* Smooth scroll */
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animated-gradient {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .card-3d {
+            transition: all 0.3s ease;
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background-size: 1000px 100%;
+            animation: shimmer 3s infinite;
+        }
+        
+        .icon-bounce {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .pattern-bg {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+        }
+        
+        .register-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .register-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+        }
+        
+        .register-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .register-btn:hover::before {
+            left: 100%;
+        }
+        
+        .contact-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .contact-card:hover::before {
+            opacity: 1;
+        }
+        
+        .wa-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .wa-btn:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+        }
+    </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body><!-- Background Laboratorium -->
-  <div class="lab-background">
-   <div class="lab-pattern"></div><!-- Lab Equipment Illustrations -->
-   <svg class="lab-equipment" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; opacity: 0.15; z-index: 1;"><defs>
-     <lineargradient id="equipGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.8" />
-      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.8" />
-     </lineargradient>
-    </defs> <!-- Beaker 1 --> <g transform="translate(100, 150)">
-     <path d="M20 10 L20 80 Q20 100 40 100 L80 100 Q100 100 100 80 L100 10 Z" fill="url(#equipGrad1)" stroke="currentColor" stroke-width="2" />
-     <ellipse cx="60" cy="10" rx="40" ry="8" fill="none" stroke="currentColor" stroke-width="2" />
-     <line x1="30" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="1" opacity="0.5" />
-     <line x1="30" y1="50" x2="90" y2="50" stroke="currentColor" stroke-width="1" opacity="0.5" />
-     <ellipse cx="50" cy="60" rx="15" ry="8" fill="#10b981" opacity="0.4" />
-    </g> <!-- Flask 1 --> <g transform="translate(300, 120)">
-     <rect x="45" y="0" width="10" height="30" fill="url(#equipGrad1)" stroke="currentColor" stroke-width="2" />
-     <ellipse cx="50" cy="0" rx="8" ry="4" fill="none" stroke="currentColor" stroke-width="2" />
-     <path d="M30 30 L40 80 Q40 110 50 110 Q60 110 60 80 L70 30 Z" fill="url(#equipGrad1)" stroke="currentColor" stroke-width="2" />
-     <ellipse cx="50" cy="85" rx="12" ry="6" fill="#3b82f6" opacity="0.5" />
-     <circle cx="45" cy="70" r="4" fill="#fff" opacity="0.6" />
-    </g> <!-- Test Tubes --> <g transform="translate(500, 140)">
-     <rect x="0" y="20" width="15" height="80" rx="7" fill="url(#equipGrad1)" stroke="currentColor" stroke-width="2" />
-     <ellipse cx="7.5" cy="20" rx="7.5" ry="3" fill="none" stroke="currentColor" stroke-width="2" />
-     <rect x="0" y="60" width="15" height="40" rx="7" fill="#10b981" opacity="0.5" />
-     <rect x="25" y="30" width="15" height="70" rx="7" fill="url(#equipGrad1)" stroke="currentColor" stroke-width="2" />
-     <ellipse cx="32.5" cy="30" rx="7.5" ry="3" fill="none" stroke="currentColor" stroke-width="2" />
-     <rect x="25" y="70" width="15" height="30" rx="7" fill="#3b82f6" opacity="0.5" />
-     <rect x="50" y="25" width="15" height="75" rx="7" fill="url(#equipGrad1)" stroke="currentColor" stroke-width="2" />
-     <ellipse cx="57.5" cy="25" rx="7.5" ry="3" fill="none" stroke="currentColor" stroke-width="2" />
-     <rect x="50" y="65" width="15" height="35" rx="7" fill="#10b981" opacity="0.6" />
-    </g> <!-- Microscope --> <g transform="translate(750, 130)">
-     <ellipse cx="50" cy="100" rx="45" ry="8" fill="currentColor" opacity="0.3" />
-     <rect x="45" y="70" width="10" height="30" fill="url(#equipGrad1)" />
-     <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="3" />
-     <circle cx="50" cy="50" r="15" fill="url(#equipGrad1)" opacity="0.6" />
-     <rect x="35" y="20" width="30" height="15" fill="url(#equipGrad1)" stroke="currentColor" stroke-width="2" />
-     <rect x="42" y="10" width="16" height="10" rx="3" fill="currentColor" opacity="0.5" />
-     <line x1="35" y1="35" x2="20" y2="35" stroke="currentColor" stroke-width="3" />
-     <circle cx="15" cy="35" r="8" fill="url(#equipGrad1)" />
-    </g> <!-- Beaker 2 --> <g transform="translate(950, 155)">
-     <path d="M15 5 L15 70 Q15 90 35 90 L75 90 Q95 90 95 70 L95 5 Z" fill="url(#equipGrad1)" stroke="currentColor" stroke-width="2" />
-     <ellipse cx="55" cy="5" rx="40" ry="8" fill="none" stroke="currentColor" stroke-width="2" />
-     <line x1="25" y1="25" x2="85" y2="25" stroke="currentColor" stroke-width="1" opacity="0.5" />
-     <line x1="25" y1="45" x2="85" y2="45" stroke="currentColor" stroke-width="1" opacity="0.5" />
-     <ellipse cx="55" cy="55" rx="20" ry="10" fill="#3b82f6" opacity="0.4" />
-     <circle cx="45" cy="50" r="5" fill="#fff" opacity="0.5" />
-    </g> <!-- Petri Dish --> <g transform="translate(1150, 170)">
-     <ellipse cx="50" cy="50" rx="45" ry="12" fill="url(#equipGrad1)" opacity="0.3" stroke="currentColor" stroke-width="2" />
-     <ellipse cx="50" cy="48" rx="45" ry="12" fill="none" stroke="currentColor" stroke-width="2" />
-     <ellipse cx="50" cy="48" rx="35" ry="9" fill="#10b981" opacity="0.2" />
-     <circle cx="40" cy="48" r="6" fill="#10b981" opacity="0.6" />
-     <circle cx="60" cy="50" r="5" fill="#3b82f6" opacity="0.6" />
-     <circle cx="50" cy="55" r="4" fill="#10b981" opacity="0.7" />
-    </g>
-   </svg>
-   <div class="bubble"></div>
-   <div class="bubble"></div>
-   <div class="bubble"></div>
-   <div class="bubble"></div>
-   <div class="bubble"></div>
-   <div class="bubble"></div>
-  </div>
-  <div id="app-root" class="min-h-full flex flex-col"><!-- Navigation -->
-   <header>
-    <nav class="glass-card fixed top-0 left-0 right-0 z-50">
-     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
-      <div class="flex items-center justify-between">
-       <div class="flex items-center gap-2 sm:gap-3"><!-- Lab Icon SVG -->
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl glass-card-strong flex items-center justify-center">
-         <svg viewbox="0 0 48 48" class="w-6 h-6 sm:w-7 sm:h-7" aria-hidden="true"><defs>
-           <lineargradient id="labGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
-           </lineargradient>
-          </defs> <!-- Erlenmeyer flask --> <path d="M18 4h12v2h-2v12l8 16c1 2 0 4-2 4H14c-2 0-3-2-2-4l8-16V6h-2V4z" fill="url(#labGrad)" opacity="0.9" /> <ellipse cx="24" cy="32" rx="8" ry="3" fill="#10b981" opacity="0.4" /> <circle cx="20" cy="28" r="2" fill="#fff" opacity="0.6" /> <circle cx="26" cy="30" r="1.5" fill="#fff" opacity="0.5" />
-         </svg>
+ <body class="animated-gradient">
+  <div class="min-h-full py-10 px-4 pattern-bg">
+   <div class="max-w-5xl mx-auto"><!-- Hero Section -->
+    <div class="text-center mb-8 float-animation">
+     <div class="inline-block">
+      <svg class="w-24 h-24 mx-auto mb-4" viewbox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" fill="white" opacity="0.9" /> <path d="M30 45 L45 60 L70 35" stroke="#667eea" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" /> <circle cx="50" cy="50" r="35" stroke="#764ba2" stroke-width="3" fill="none" opacity="0.5" />
+      </svg>
+     </div>
+     <div class="inline-block glass-effect px-8 py-3 rounded-full pulse-glow mb-4"><span class="text-purple-700 font-bold text-lg">🎯 <span id="target-text">Target 500 Peserta</span></span>
+     </div>
+    </div><!-- Main Card -->
+    <div class="glass-effect rounded-3xl card-3d p-8 mb-6 shadow-2xl">
+     <h1 id="seminar-title" class="text-4xl font-extrabold text-center mb-6 gradient-text leading-tight">Penguatan Sistem Mutu Laboratorium melalui Penerapan Quality Control dan Akreditasi yang Berkesinambungan</h1><!-- Details Grid with Icons -->
+     <div class="grid md:grid-cols-2 gap-4 mb-8">
+      <div class="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl p-5 text-white card-3d">
+       <div class="flex items-center">
+        <div class="text-4xl mr-4 icon-bounce">
+         📅
         </div>
         <div>
-         <h1 id="nav-title" class="font-bold text-xs sm:text-sm">Seminar Mutu Laboratorium</h1>
-         <p id="nav-subtitle" class="text-xs opacity-80 hidden sm:block">Quality Control &amp; Akreditasi</p>
-        </div>
-       </div><a id="nav-cta" href="https://forms.gle/eoe1tK3TVKJYJsos6" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105"> <span>Daftar</span> <span>→</span> </a>
-      </div>
-     </div>
-    </nav>
-   </header><!-- Hero Section -->
-   <main class="flex-1 pt-20 sm:pt-24 pb-8 sm:pb-12">
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-     <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start"><!-- Left Content -->
-      <div class="space-y-4 sm:space-y-6"><!-- Badge -->
-       <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card text-xs sm:text-sm font-medium">
-        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewbox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-        </svg><span>Target 500 Peserta</span>
-       </div><!-- Title -->
-       <div class="space-y-3 sm:space-y-4">
-        <h2 id="hero-title" class="font-bold leading-tight text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Penguatan Sistem Mutu Laboratorium melalui Penerapan Quality Control dan Akreditasi yang Berkesinambungan</h2>
-        <p id="hero-subtitle" class="opacity-90 leading-relaxed text-sm sm:text-base lg:text-lg">Tingkatkan keandalan laboratorium Anda dengan penerapan Quality Control yang komprehensif serta strategi akreditasi berkelanjutan bersama para praktisi dan narasumber berpengalaman.</p>
-       </div><!-- Quick Info Cards -->
-       <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
-        <div class="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 space-y-2">
-         <div class="flex items-center gap-2 text-xs sm:text-sm lg:text-base font-semibold opacity-80">
-          <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg><span>Tanggal &amp; Waktu</span>
-         </div>
-         <p class="font-bold text-sm sm:text-base lg:text-lg">Minggu, 11 Januari 2026</p>
-         <p class="text-xs sm:text-sm lg:text-base">07.30 – 16.00 WITA</p>
-        </div>
-        <div class="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 space-y-2">
-         <div class="flex items-center gap-2 text-xs sm:text-sm lg:text-base font-semibold opacity-80">
-          <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg><span>Platform</span>
-         </div>
-         <p class="font-bold text-sm sm:text-base lg:text-lg">Hybrid (Luring &amp; Daring)</p>
-         <p class="text-xs sm:text-sm lg:text-base">Aula Rumah Jabatan Bupati Pangkep</p>
-        </div>
-       </div><!-- CTA Buttons -->
-       <div class="flex flex-col sm:flex-row gap-3 pt-2"><a id="hero-cta" href="https://forms.gle/eoe1tK3TVKJYJsos6" target="_blank" rel="noopener noreferrer" class="pulse-cta inline-flex items-center justify-center gap-2 px-6 sm:px-7 lg:px-8 py-3 sm:py-3.5 lg:py-4 rounded-full font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:scale-105"> <span id="cta-text">Daftar Sekarang</span>
-         <svg class="w-5 h-5 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-         </svg></a> <button onclick="scrollToInfo()" class="glass-card inline-flex items-center justify-center gap-2 px-6 sm:px-7 lg:px-8 py-3 sm:py-3.5 lg:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:scale-105"> <span>Lihat Detail</span>
-         <svg class="w-4 h-4 sm:w-4 sm:h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-         </svg></button>
-       </div>
-      </div><!-- Right Sidebar - Pricing Card -->
-      <aside class="lg:sticky lg:top-28">
-       <div class="glass-card-strong rounded-2xl sm:rounded-3xl p-4 sm:p-6 space-y-4 sm:space-y-6 hover-lift">
-        <div class="flex items-center justify-between">
-         <div>
-          <p class="text-xs font-semibold uppercase tracking-wider opacity-80">Investasi</p>
-          <h3 class="text-lg sm:text-xl font-bold mt-1">Biaya Pendaftaran</h3>
-         </div>
-         <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-card flex items-center justify-center">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-         </div>
-        </div>
-        <div class="space-y-3 sm:space-y-4">
-         <div class="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between">
-          <div>
-           <p class="text-xs sm:text-sm lg:text-base opacity-80">Umum Offline</p>
-           <p class="text-xl sm:text-2xl lg:text-3xl font-bold mt-1">Rp 100.000</p>
-          </div><span class="px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold glass-card">Luring</span>
-         </div>
-         <div class="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between">
-          <div>
-           <p class="text-xs sm:text-sm lg:text-base opacity-80">Umum Online</p>
-           <p class="text-xl sm:text-2xl lg:text-3xl font-bold mt-1">Rp 50.000</p>
-          </div><span class="px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold glass-card">Daring</span>
-         </div>
-        </div>
-        <div class="glass-card rounded-2xl p-4 border-dashed">
-         <p class="text-sm font-semibold mb-2">📋 Catatan Penting</p>
-         <ul class="text-xs space-y-1 opacity-90">
-          <li>��� Kuota total 500 peserta (online &amp; offline)</li>
-          <li>• Seat luring terbatas, first come first served</li>
-          <li>• Konfirmasi pembayaran via narahubung</li>
-         </ul>
-        </div><a href="https://forms.gle/eoe1tK3TVKJYJsos6" target="_blank" rel="noopener noreferrer" class="block w-full text-center px-6 py-3 rounded-full font-bold transition-all duration-300 hover:scale-105"> Isi Form Pendaftaran </a>
-       </div>
-      </aside>
-     </div>
-    </section><!-- Detail Section -->
-    <section id="info-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16 lg:mt-20">
-     <h2 id="info-title" class="font-bold mb-5 sm:mb-6 lg:mb-8 text-xl sm:text-2xl lg:text-3xl xl:text-4xl">Rincian Seminar</h2>
-     <div class="grid md:grid-cols-3 gap-4 sm:gap-6">
-      <div class="md:col-span-2 glass-card-strong rounded-2xl sm:rounded-3xl p-4 sm:p-6 space-y-4 hover-lift">
-       <div>
-        <h3 class="font-bold mb-2 flex items-center gap-2 text-base sm:text-lg">
-         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewbox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /> <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
-         </svg> Gambaran Umum</h3>
-        <p class="opacity-90 leading-relaxed text-sm sm:text-base">Seminar ini dirancang untuk memperkuat sistem mutu laboratorium melalui penerapan Quality Control yang efektif serta pemenuhan standar akreditasi secara berkesinambungan. Cocok untuk tenaga laboratorium klinik, analis, penanggung jawab mutu, dan manajer laboratorium.</p>
-       </div>
-       <div class="grid sm:grid-cols-2 gap-3 sm:gap-4 pt-2">
-        <div class="glass-card rounded-lg sm:rounded-xl p-3 sm:p-4">
-         <p class="text-xs font-semibold opacity-80 mb-2">📅 Jadwal</p>
-         <p class="font-semibold text-sm sm:text-base">Minggu, 11 Januari 2026</p>
-         <p class="text-xs sm:text-sm mt-1">Pukul 07.30 – 16.00 WITA</p>
-        </div>
-        <div class="glass-card rounded-lg sm:rounded-xl p-3 sm:p-4">
-         <p class="text-xs font-semibold opacity-80 mb-2">��� Format</p>
-         <p class="font-semibold text-sm sm:text-base">Hybrid Event</p>
-         <p class="text-xs sm:text-sm mt-1">Luring &amp; Daring tersedia</p>
+         <p class="text-sm opacity-90 font-semibold">Hari &amp; Tanggal</p>
+         <p id="seminar-date" class="text-xl font-bold">Minggu, 11 Januari 2026</p>
         </div>
        </div>
       </div>
-      <div class="glass-card-strong rounded-2xl sm:rounded-3xl p-4 sm:p-6 hover-lift">
-       <h3 class="font-bold mb-3 sm:mb-4 flex items-center gap-2 text-base sm:text-lg">
-        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-        </svg> Biaya Investasi</h3>
-       <div class="space-y-3">
-        <div class="flex justify-between items-center"><span class="text-xs sm:text-sm">Offline</span> <span class="font-bold text-sm sm:text-base">Rp 100.000</span>
+      <div class="bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl p-5 text-white card-3d">
+       <div class="flex items-center">
+        <div class="text-4xl mr-4 icon-bounce" style="animation-delay: 0.2s;">
+         ⏰
         </div>
-        <div class="flex justify-between items-center"><span class="text-xs sm:text-sm">Online</span> <span class="font-bold text-sm sm:text-base">Rp 50.000</span>
+        <div>
+         <p class="text-sm opacity-90 font-semibold">Waktu</p>
+         <p id="seminar-time" class="text-xl font-bold">07.30 sd 16.00 WITA</p>
         </div>
        </div>
-       <p class="text-xs opacity-80 mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/10">Informasi pembayaran akan disampaikan melalui narahubung setelah pendaftaran.</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl p-5 text-white card-3d">
+       <div class="flex items-center">
+        <div class="text-4xl mr-4 icon-bounce" style="animation-delay: 0.4s;">
+         🖥️
+        </div>
+        <div>
+         <p class="text-sm opacity-90 font-semibold">Platform</p>
+         <p class="text-xl font-bold">Hybrid (Online &amp; Offline)</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-5 text-white card-3d">
+       <div class="flex items-center">
+        <div class="text-4xl mr-4 icon-bounce" style="animation-delay: 0.6s;">
+         📍
+        </div>
+        <div>
+         <p class="text-sm opacity-90 font-semibold">Tempat (Offline)</p>
+         <p id="venue" class="text-base font-bold">Gedung Aula Rumah Jabatan Bupati Pangkajene &amp; Kepulauan</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Pricing with Sparkle Effect -->
+     <div class="bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-2xl p-8 text-white mb-8 card-3d shimmer">
+      <h3 class="text-3xl font-extrabold mb-6 text-center"><span class="icon-bounce inline-block">💰</span> Biaya Pendaftaran</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+       <div class="bg-white bg-opacity-25 backdrop-blur rounded-xl p-6 text-center card-3d">
+        <div class="text-5xl mb-3">
+         🏢
+        </div>
+        <p class="text-lg mb-2 font-semibold">Offline</p>
+        <p id="price-offline" class="text-4xl font-extrabold">Rp. 100.000</p>
+       </div>
+       <div class="bg-white bg-opacity-25 backdrop-blur rounded-xl p-6 text-center card-3d">
+        <div class="text-5xl mb-3">
+         💻
+        </div>
+        <p class="text-lg mb-2 font-semibold">Online</p>
+        <p id="price-online" class="text-4xl font-extrabold">Rp. 50.000</p>
+       </div>
+      </div>
+     </div><!-- Super Attractive Registration Button -->
+     <div class="text-center"><a href="https://forms.gle/eoe1tK3TVKJYJsos6" target="_blank" rel="noopener noreferrer" class="register-btn inline-block bg-gradient-to-r from-green-500 via-emerald-600 to-teal-600 text-white font-extrabold text-2xl px-16 py-6 rounded-full shadow-2xl"> <span class="relative z-10 flex items-center justify-center"> <span class="text-3xl mr-3">✅</span> DAFTAR SEKARANG <span class="text-3xl ml-3">🚀</span> </span> </a>
+      <p class="mt-4 text-white font-semibold text-lg">Buruan daftar sebelum kuota penuh!</p>
+     </div>
+    </div><!-- Contact Section with Enhanced Design -->
+    <div class="glass-effect rounded-3xl p-8 shadow-2xl">
+     <h2 class="text-3xl font-extrabold text-center mb-3 gradient-text"><span class="icon-bounce inline-block">📞</span> Narahubung Pendaftaran</h2>
+     <p class="text-center text-gray-600 mb-8 text-lg">Hubungi kami untuk informasi lebih lanjut</p>
+     <div class="grid md:grid-cols-3 gap-6"><!-- Contact 1 -->
+      <div class="contact-card bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl p-6 border-4 border-purple-300 card-3d">
+       <div class="text-center">
+        <div class="relative inline-block mb-4">
+         <div class="bg-gradient-to-br from-purple-600 to-purple-800 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto text-2xl font-bold shadow-lg">
+          1
+         </div>
+         <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div>
+        </div>
+        <h3 class="font-extrabold text-gray-800 text-xl mb-1">KARLINA</h3>
+        <p class="text-sm text-purple-700 font-bold mb-4">(PANGKEP)</p><a href="https://wa.me/6285341742606" target="_blank" rel="noopener noreferrer" class="wa-btn inline-flex items-center justify-center bg-green-500 text-white px-6 py-3 rounded-xl font-bold shadow-lg w-full"> <span class="text-xl mr-2">💬</span> 085341742606 </a>
+       </div>
+      </div><!-- Contact 2 -->
+      <div class="contact-card bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-6 border-4 border-blue-300 card-3d">
+       <div class="text-center">
+        <div class="relative inline-block mb-4">
+         <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto text-2xl font-bold shadow-lg">
+          2
+         </div>
+         <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div>
+        </div>
+        <h3 class="font-extrabold text-gray-800 text-xl mb-1">AULIA HARUN</h3>
+        <p class="text-sm text-blue-700 font-bold mb-4">(MAROS)</p><a href="https://wa.me/6281341065270" target="_blank" rel="noopener noreferrer" class="wa-btn inline-flex items-center justify-center bg-green-500 text-white px-6 py-3 rounded-xl font-bold shadow-lg w-full"> <span class="text-xl mr-2">💬</span> 081341065270 </a>
+       </div>
+      </div><!-- Contact 3 -->
+      <div class="contact-card bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl p-6 border-4 border-pink-300 card-3d">
+       <div class="text-center">
+        <div class="relative inline-block mb-4">
+         <div class="bg-gradient-to-br from-pink-600 to-pink-800 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto text-2xl font-bold shadow-lg">
+          3
+         </div>
+         <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div>
+        </div>
+        <h3 class="font-extrabold text-gray-800 text-xl mb-1">WIDYA</h3>
+        <p class="text-sm text-pink-700 font-bold mb-4">(BARRU)</p><a href="https://wa.me/6281939270533" target="_blank" rel="noopener noreferrer" class="wa-btn inline-flex items-center justify-center bg-green-500 text-white px-6 py-3 rounded-xl font-bold shadow-lg w-full"> <span class="text-xl mr-2">💬</span> 081939270533 </a>
+       </div>
       </div>
      </div>
-    </section><!-- Contact Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12 lg:mt-16">
-     <h2 id="contact-title" class="font-bold mb-5 sm:mb-6 lg:mb-8 text-xl sm:text-2xl lg:text-3xl xl:text-4xl">Narahubung Pendaftaran</h2>
-     <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8"><!-- Karlina -->
-      <article class="glass-card-strong rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 hover-lift">
-       <div class="flex items-start justify-between mb-4 sm:mb-5">
-        <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full glass-card flex items-center justify-center font-bold text-lg sm:text-xl lg:text-2xl">
-         K
-        </div><span class="px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold glass-card">Pangkep</span>
-       </div>
-       <h3 class="font-bold text-base sm:text-lg lg:text-xl">KARLINA</h3>
-       <p class="text-xs sm:text-sm lg:text-base opacity-80 mt-1">Koordinator Pangkep</p>
-       <div class="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-white/10">
-        <p class="text-xs sm:text-sm opacity-80 mb-1">WhatsApp</p>
-        <p class="font-bold text-sm sm:text-base lg:text-lg">0853-4174-2606</p>
-       </div>
-      </article><!-- Aulia -->
-      <article class="glass-card-strong rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 hover-lift">
-       <div class="flex items-start justify-between mb-4 sm:mb-5">
-        <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full glass-card flex items-center justify-center font-bold text-lg sm:text-xl lg:text-2xl">
-         A
-        </div><span class="px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold glass-card">Maros</span>
-       </div>
-       <h3 class="font-bold text-base sm:text-lg lg:text-xl">AULIA HARUN</h3>
-       <p class="text-xs sm:text-sm lg:text-base opacity-80 mt-1">Koordinator Maros</p>
-       <div class="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-white/10">
-        <p class="text-xs sm:text-sm opacity-80 mb-1">WhatsApp</p>
-        <p class="font-bold text-sm sm:text-base lg:text-lg">0813-4106-5270</p>
-       </div>
-      </article><!-- Widya -->
-      <article class="glass-card-strong rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 hover-lift">
-       <div class="flex items-start justify-between mb-4 sm:mb-5">
-        <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full glass-card flex items-center justify-center font-bold text-lg sm:text-xl lg:text-2xl">
-         W
-        </div><span class="px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold glass-card">Barru</span>
-       </div>
-       <h3 class="font-bold text-base sm:text-lg lg:text-xl">WIDYA</h3>
-       <p class="text-xs sm:text-sm lg:text-base opacity-80 mt-1">Koordinator Barru</p>
-       <div class="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-white/10">
-        <p class="text-xs sm:text-sm opacity-80 mb-1">WhatsApp</p>
-        <p class="font-bold text-sm sm:text-base lg:text-lg">0819-3927-0533</p>
-       </div>
-      </article>
-     </div>
-    </section>
-   </main><!-- Footer -->
-   <footer class="mt-10 sm:mt-12 lg:mt-16 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 lg:py-8">
-     <p id="footer-text" class="text-xs sm:text-sm lg:text-base opacity-80 text-center leading-relaxed">Pastikan data pendaftaran diisi dengan benar. Informasi teknis dan link pelaksanaan daring akan dikirimkan melalui narahubung setelah pendaftaran terkonfirmasi.</p>
+    </div><!-- Footer -->
+    <div class="text-center mt-8">
+     <p class="text-white text-lg font-semibold opacity-90">✨ Jangan lewatkan kesempatan emas ini! ✨</p>
     </div>
-   </footer>
+   </div>
   </div>
   <script>
-    const defaultConfig = {
-      // Colors (max 5)
-      background_color: "#f0f9ff",
-      surface_color: "#ffffff",
-      text_color: "#0f172a",
-      primary_action_color: "#10b981",
-      secondary_action_color: "#3b82f6",
-      // Typography
-      font_family: "Inter",
-      font_size: 16,
-      // Editable texts
-      hero_title: "Penguatan Sistem Mutu Laboratorium melalui Penerapan Quality Control dan Akreditasi yang Berkesinambungan",
-      hero_subtitle: "Tingkatkan keandalan laboratorium Anda dengan penerapan Quality Control yang komprehensif serta strategi akreditasi berkelanjutan bersama para praktisi dan narasumber berpengalaman.",
-      cta_button_text: "Daftar Sekarang",
-      info_section_title: "Rincian Seminar",
-      contact_section_title: "Narahubung Pendaftaran",
-      footer_text: "Pastikan data pendaftaran diisi dengan benar. Informasi teknis dan link pelaksanaan daring akan dikirimkan melalui narahubung setelah pendaftaran terkonfirmasi."
-    };
+        const defaultConfig = {
+            seminar_title: "Penguatan Sistem Mutu Laboratorium melalui Penerapan Quality Control dan Akreditasi yang Berkesinambungan",
+            seminar_date: "Minggu, 11 Januari 2026",
+            seminar_time: "07.30 sd 16.00 WITA",
+            venue: "Gedung Aula Rumah Jabatan Bupati Pangkajene & Kepulauan",
+            target_participants: "Target 500 Peserta",
+            price_offline: "Rp. 100.000",
+            price_online: "Rp. 50.000"
+        };
 
-    function applyConfig(config) {
-      const cfg = { ...defaultConfig, ...config };
-      const baseFontStack = "system-ui, -apple-system, sans-serif";
-      const customFont = cfg.font_family || defaultConfig.font_family;
-      const baseSize = Number(cfg.font_size) || defaultConfig.font_size;
-
-      // Apply background
-      document.body.style.backgroundColor = cfg.background_color;
-      document.body.style.color = cfg.text_color;
-      document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
-
-      const appRoot = document.getElementById('app-root');
-      if (appRoot) {
-        appRoot.style.color = cfg.text_color;
-      }
-
-      // Apply colors to elements
-      const labPattern = document.querySelector('.lab-pattern');
-      if (labPattern) labPattern.style.color = cfg.text_color;
-
-      const bubbles = document.querySelectorAll('.bubble');
-      bubbles.forEach(bubble => {
-        bubble.style.backgroundColor = cfg.primary_action_color;
-      });
-
-      const glassCards = document.querySelectorAll('.glass-card, .glass-card-strong');
-      glassCards.forEach(card => {
-        card.style.color = cfg.text_color;
-      });
-
-      // Primary action buttons
-      const primaryButtons = document.querySelectorAll('#hero-cta, #nav-cta, aside a:last-child');
-      primaryButtons.forEach(btn => {
-        btn.style.backgroundColor = cfg.primary_action_color;
-        btn.style.color = cfg.background_color;
-      });
-
-      // Font sizes - responsive scaling
-      const h2Elements = document.querySelectorAll('h2');
-      h2Elements.forEach(h2 => h2.style.fontSize = `${baseSize * 1.75}px`);
-
-      const h3Elements = document.querySelectorAll('h3');
-      h3Elements.forEach(h3 => h3.style.fontSize = `${baseSize * 1.25}px`);
-
-      const heroTitle = document.getElementById('hero-title');
-      if (heroTitle) {
-        heroTitle.style.fontSize = `${baseSize * 1.75}px`;
-        heroTitle.textContent = cfg.hero_title;
-      }
-
-      const heroSubtitle = document.getElementById('hero-subtitle');
-      if (heroSubtitle) {
-        heroSubtitle.style.fontSize = `${baseSize * 1.05}px`;
-        heroSubtitle.textContent = cfg.hero_subtitle;
-      }
-
-      const ctaText = document.getElementById('cta-text');
-      if (ctaText) ctaText.textContent = cfg.cta_button_text;
-
-      const navCtaSpan = document.querySelector('#nav-cta span:first-child');
-      if (navCtaSpan) navCtaSpan.textContent = cfg.cta_button_text;
-
-      const infoTitle = document.getElementById('info-title');
-      if (infoTitle) infoTitle.textContent = cfg.info_section_title;
-
-      const contactTitle = document.getElementById('contact-title');
-      if (contactTitle) contactTitle.textContent = cfg.contact_section_title;
-
-      const footerText = document.getElementById('footer-text');
-      if (footerText) footerText.textContent = cfg.footer_text;
-    }
-
-    function scrollToInfo() {
-      const section = document.getElementById('info-section');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-
-    // Initialize Element SDK
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange: async (config) => {
-          applyConfig(config);
-        },
-        mapToCapabilities: (config) => {
-          const cfg = { ...defaultConfig, ...config };
-          return {
-            recolorables: [
-              {
-                get: () => cfg.background_color,
-                set: (value) => {
-                  cfg.background_color = value;
-                  window.elementSdk.setConfig({ background_color: value });
-                }
-              },
-              {
-                get: () => cfg.surface_color,
-                set: (value) => {
-                  cfg.surface_color = value;
-                  window.elementSdk.setConfig({ surface_color: value });
-                }
-              },
-              {
-                get: () => cfg.text_color,
-                set: (value) => {
-                  cfg.text_color = value;
-                  window.elementSdk.setConfig({ text_color: value });
-                }
-              },
-              {
-                get: () => cfg.primary_action_color,
-                set: (value) => {
-                  cfg.primary_action_color = value;
-                  window.elementSdk.setConfig({ primary_action_color: value });
-                }
-              },
-              {
-                get: () => cfg.secondary_action_color,
-                set: (value) => {
-                  cfg.secondary_action_color = value;
-                  window.elementSdk.setConfig({ secondary_action_color: value });
-                }
-              }
-            ],
-            borderables: [],
-            fontEditable: {
-              get: () => cfg.font_family,
-              set: (value) => {
-                cfg.font_family = value;
-                window.elementSdk.setConfig({ font_family: value });
-              }
-            },
-            fontSizeable: {
-              get: () => cfg.font_size,
-              set: (value) => {
-                const num = Number(value) || defaultConfig.font_size;
-                cfg.font_size = num;
-                window.elementSdk.setConfig({ font_size: num });
-              }
-            }
-          };
-        },
-        mapToEditPanelValues: (config) => {
-          const cfg = { ...defaultConfig, ...config };
-          return new Map([
-            ["hero_title", cfg.hero_title],
-            ["hero_subtitle", cfg.hero_subtitle],
-            ["cta_button_text", cfg.cta_button_text],
-            ["info_section_title", cfg.info_section_title],
-            ["contact_section_title", cfg.contact_section_title],
-            ["footer_text", cfg.footer_text]
-          ]);
+        async function onConfigChange(config) {
+            document.getElementById('seminar-title').textContent = config.seminar_title || defaultConfig.seminar_title;
+            document.getElementById('seminar-date').textContent = config.seminar_date || defaultConfig.seminar_date;
+            document.getElementById('seminar-time').textContent = config.seminar_time || defaultConfig.seminar_time;
+            document.getElementById('venue').textContent = config.venue || defaultConfig.venue;
+            document.getElementById('target-text').textContent = config.target_participants || defaultConfig.target_participants;
+            document.getElementById('price-offline').textContent = config.price_offline || defaultConfig.price_offline;
+            document.getElementById('price-online').textContent = config.price_online || defaultConfig.price_online;
         }
-      });
 
-      applyConfig(window.elementSdk.config || defaultConfig);
-    } else {
-      applyConfig(defaultConfig);
-    }
-  </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a0826b472ec283c',t:'MTc2MzQ3NjA3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["seminar_title", config.seminar_title || defaultConfig.seminar_title],
+                ["seminar_date", config.seminar_date || defaultConfig.seminar_date],
+                ["seminar_time", config.seminar_time || defaultConfig.seminar_time],
+                ["venue", config.venue || defaultConfig.venue],
+                ["target_participants", config.target_participants || defaultConfig.target_participants],
+                ["price_offline", config.price_offline || defaultConfig.price_offline],
+                ["price_online", config.price_online || defaultConfig.price_online]
+            ]);
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a082f6bd7a4b29b',t:'MTc2MzQ3NjQzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
